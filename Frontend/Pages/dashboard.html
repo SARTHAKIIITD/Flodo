@@ -9,21 +9,44 @@
 </head>
 <body>
   <div class="flex outer-container">
-
+    <!-- top bar -->
+    <div class="flex top-bar">
+      <div class="flex logo-container">
+        <img src="../Assets/icons/Flowdo.jpeg" alt="logo">
+        Flodow
+      </div>
+      <div class="flex top-bar-inner-container">
+        <div class="flex action-bar-container">
+          <button class="flex" id="dark-mode-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun preview-icon"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg></button>
+          <button class="flex"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell preview-icon"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg></button>
+          <button class="flex"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round preview-icon"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <!-- side bar + workspace -->
+    <div class="flex inner-container">
+    <!-- side bar -->
     <div class="flex side-bar">
-      <!-- side buttons -->
       <div class="flex btn-container">
-        <button id="dash-btn">Dashboard</button>
-        <button id="todo-btn">todos</button>
-        <button id="kanban-btn">kanban</button>
+        <button class="flex" id="dash-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-dashboard preview-icon"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          Dashboard
+        </button>
+        <button class="flex" id="todo-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list-todo preview-icon"><path d="M13 5h8"/><path d="M13 12h8"/><path d="M13 19h8"/><path d="m3 17 2 2 4-4"/><rect x="3" y="4" width="6" height="6" rx="1"/></svg>
+          todos
+        </button>
+        <button class="flex" id="kanban-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-kanban preview-icon"><path d="M5 3v14"/><path d="M12 3v8"/><path d="M19 3v18"/></svg>kanban
+        </button>
       </div>
       <button id="logout-btn">Logout</button>
     </div>
-
-    <div class="flex inner-container">
+    <!-- Workspace -->
+    <div class="flex workspace">
       <!-- DASHBOARD -->
       <section id="dashboard" class="page active-page">
-        <h1>Welcome <span id="user-name"></span></h1>
+        <!-- <h1>Welcome <span id="user-name"></span></h1> -->
       </section>
       
       <!-- TODO-LIST -->
@@ -36,7 +59,6 @@
         <div class="clear-all-btn-container">
           <button id="clear-all-btn">clear all</button>
         </div>
-      </div>
     </section>
 
     <!-- kanban Board -->
@@ -61,7 +83,8 @@
         </div>
       </div>
     </section>
-
+    </div>
+    </div>
   </div>
   <script src="../Js/dashboard.js"></script>
   <script src="../Js/kanban.js"></script>

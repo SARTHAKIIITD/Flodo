@@ -1,3 +1,6 @@
+document.querySelector('#dark-mode-btn').addEventListener('click', () => {
+  // code to be written
+});
 document.querySelectorAll('.btn-container button').forEach(button => {
   button.addEventListener('click', () => {
     document.querySelectorAll('.page').forEach(pg => {
@@ -10,9 +13,9 @@ document.querySelectorAll('.btn-container button').forEach(button => {
 });
 
 const user = JSON.parse(localStorage.getItem("user"));
-document.querySelector('#user-name').innerHTML = `
-${user.name}
-`;
+// document.querySelector('#user-name').innerHTML = `
+// ${user.name}
+// `;
 
 let todoList =[];
 
@@ -119,6 +122,7 @@ document.querySelector('#add-btn').addEventListener('click', async() => {
 });
 
 document.querySelector('#logout-btn').addEventListener('click', () => {
+  console.log('logout button was clicked');
   localStorage.clear();
   window.location.href = '/';
 });

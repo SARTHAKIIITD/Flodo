@@ -3,7 +3,8 @@ createAccountBtn.addEventListener("click", () => {
   window.location.href = "/signup";
 });
 
-document.querySelector('#login-btn').addEventListener('click', async() =>{
+document.querySelector('#login-form').addEventListener('submit', async(e) =>{
+  e.preventDefault();
   try{
     const username = document.querySelector('#username');
     const password = document.querySelector('#password');
