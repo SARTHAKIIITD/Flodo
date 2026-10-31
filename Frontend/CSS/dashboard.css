@@ -3,14 +3,13 @@
   padding: 0;
   box-sizing: border-box;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: #1F2937;
 }
 
 /* variables */
 :root{
   /* colors */
-  --primary-color: #F9FAFB;
-  --secondary-color: #f5f7f9 ;
+ --primary-color: #F9FAFB;
+  --secondary-color: #F1F5F9;
   /* Font sizes */
   --font-xs: 12px;   /* Search bar, Card descriptions */
   --font-sm: 14px;   /* Sidebar buttons */
@@ -67,6 +66,7 @@ button{
 .logo-container{
   align-items: center;
   width: 13%;
+  gap: 7px;
   padding-left: 20px;
   font-size: var(--font-2xl);
   font-weight: var(--font-semibold);
@@ -74,7 +74,7 @@ button{
 }
 
 .logo-container img{
-  width: 40%;
+  width: 15%;
 }
 .top-bar-inner-container{
   flex-grow: 1;
@@ -114,30 +114,57 @@ button{
   width: 13%;
   flex-direction: column;
   justify-content: space-between;
+  padding: 15px 0;
   background-color: var(--primary-color);
   border-right: rgb(132, 132, 132) solid 1px;
 }
 
 .btn-container{
   flex-direction: column;
-  /* border: black solid 2px; */
-  gap: 3px;
+  gap: 4px;
+  /* margin-top: 15px; */
+  
 }
 
 .btn-container button{
-  height: 30px;
-  gap: 4px;
+  height: 40px;
   align-items: center;
   font-size: var(--font-sm);
   font-weight: var(--font-bold);
-  border-radius: 5px;
-  border-left: blue solid 5px;
+  padding: 0 10px;
+  color: var(--text-primary);
+  background-color: var(--primary-color);
+  border-left: transparent solid 3px;
+  /* border: black solid 1px; */
 }
-.btn-container button svg{
+
+.btn-container button span{
+  height: 100%;
+  gap: 5px;
+  align-items: center;
+  flex-grow: 1;
+  padding-left: 15px;
+  border-radius: 7px;
+  /* border: black dotted 1px; */
+}
+
+.btn-container button span svg{
   height: var(--icon-size);
   width: var(--icon-size);
-  color: var(--text-primary);
   stroke-width: 2;
+}
+
+.btn-container button:hover{
+  border-left: var(--text-link) solid 3px;
+}
+
+.btn-container button:hover span {
+  background-color: rgb(164, 164, 250);
+  color: var(--text-link);
+}
+
+.btn-container button:hover span svg{
+  color: var(--text-link);
 }
 
 .workspace{
