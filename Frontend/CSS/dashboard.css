@@ -175,7 +175,7 @@ button{
 .workspace{
   display: flex;
   flex-grow: 1;
-  background-color: aqua;
+  background-color: var(--secondary-color);
 }
 
 .page{

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
   <link rel="stylesheet" href="../CSS/dashboard.css">
+  <link rel="stylesheet" href="../CSS/todo.css">
   <link rel="stylesheet" href="../CSS/kanban.css">
 </head>
 <body>
@@ -64,7 +65,7 @@
         <button class="flex" id="logout-btn">
           <span class="flex">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-question-mark preview-icon"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
-            Help & Support
+            logout
           </span>
         </button>
       </div>
@@ -79,13 +80,15 @@
       
       <!-- TODO-LIST -->
       <section id="todo-list" class="page">
-        <div class="add-item-container">
+        <div class="flex add-item-container">
           <input id="task-input" type="text" placeholder="Enter new task">
-          <button id="add-btn">add</button>
+          <button id="add-btn">+</button>
         </div>
-        <div class="flex list-display"></div>
-        <div class="clear-all-btn-container">
-          <button id="clear-all-btn">clear all</button>
+        <div class="inner-action">
+          <div class="flex list-display"></div>
+          <div class="clear-all-btn-container">
+            <button id="clear-all-btn">clear all</button>
+          </div>
         </div>
     </section>
 
@@ -115,6 +118,7 @@
     </div>
   </div>
   <script src="../Js/dashboard.js"></script>
+  <script src="../Js/todo.js"></script>
   <script src="../Js/kanban.js"></script>
 </body>
 </html>
