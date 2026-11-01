@@ -10,6 +10,7 @@
   /* colors */
  --primary-color: #F9FAFB;
   --secondary-color: #F1F5F9;
+  --border-color: #848484;
   /* Font sizes */
   --font-xs: 12px;   /* Search bar, Card descriptions */
   --font-sm: 14px;   /* Sidebar buttons */
@@ -38,6 +39,12 @@
   --top-bar-height: 30%;
 }
 
+.dark{
+  --primary-color:#121212;
+  --secondary-color:#3a3a3a;
+  --text-primary: #ffffff;
+  --border-color: #ffffff;
+}
 /* functionalities */
 button{
   border: none;
@@ -60,22 +67,24 @@ button{
   width:100%;
   min-height: 7%;
   background-color: var(--primary-color);
-  border-bottom: rgb(132, 132, 132) solid 1px;
+  border-bottom: var(--border-color) solid 1px;
 }
 
 .logo-container{
   align-items: center;
   width: 13%;
+  color: var(--text-primary);
   gap: 7px;
   padding-left: 20px;
   font-size: var(--font-2xl);
   font-weight: var(--font-semibold);
-  border-right: rgb(132, 132, 132) solid 1px;
+  border-right: var(--border-color) solid 1px;
 }
 
 .logo-container img{
   width: 15%;
 }
+
 .top-bar-inner-container{
   flex-grow: 1;
   justify-content: flex-end;
@@ -116,14 +125,12 @@ button{
   justify-content: space-between;
   padding: 15px 0;
   background-color: var(--primary-color);
-  border-right: rgb(132, 132, 132) solid 1px;
+  border-right: var(--border-color) solid 1px;
 }
 
 .btn-container{
   flex-direction: column;
   gap: 4px;
-  /* margin-top: 15px; */
-  
 }
 
 .btn-container button{
@@ -135,7 +142,6 @@ button{
   color: var(--text-primary);
   background-color: var(--primary-color);
   border-left: transparent solid 3px;
-  /* border: black solid 1px; */
 }
 
 .btn-container button span{
@@ -145,7 +151,6 @@ button{
   flex-grow: 1;
   padding-left: 15px;
   border-radius: 7px;
-  /* border: black dotted 1px; */
 }
 
 .btn-container button span svg{
