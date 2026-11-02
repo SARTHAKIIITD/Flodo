@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Expense Tracker</title>
+  <link rel="icon" type="image/png" href="Frontend/Assets/icons/Flowdo.jpeg">
   <link rel="stylesheet" href="Frontend/CSS/index.css">
-  <!-- <link rel="stylesheet" href="frontend/responsive-css/resp-index.css"> -->
 </head>
 <body>
   <div class="flex outer-container">
@@ -14,16 +14,16 @@
     </div>
     <div class="flex outer-login-container">
       <div class="flex login-container">
-        <h2>Expense tracker</h2>
+        <h2>FlowDo</h2>
         <div class="flex login">
           <h1>Welcome Back!</h1>
           <p>Don't have an account? <span id="create-account">Create a new account now,</span> <br> its FREE Takes less than a minute.</p>
-          <form class="flex">
+          <form id="login-form" class="flex">
             <input type="text" id="username" class="login-inputs" placeholder="username">
             <input type="password" id="password" class="login-inputs" placeholder="password">
-            <button id="login-btn" type="button">Login Now</button>
-            <button id="login-with-google-btn" class="flex"><img src="Assets/icons/google-logo.jpg" alt="google-logo">&nbsp Login with Google</button>
+            <button id="login-btn">Login Now</button>
           </form>
+          <button id="login-with-google-btn" class="flex"><img src="Assets/icons/google-logo.jpg" alt="google-logo">&nbsp Login with Google</button>
           <p class="forget-pass">Forget password <span>Click here</span></p>
         </div>
       </div>
