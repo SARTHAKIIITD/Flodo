@@ -11,6 +11,7 @@
  --primary-color: #F9FAFB;
   --secondary-color: #F1F5F9;
   --border-color: #848484;
+  --button-bg: rgb(255, 255, 255);
   /* Font sizes */
   --font-xs: 12px;   /* Search bar, Card descriptions */
   --font-sm: 14px;   /* Sidebar buttons */
@@ -39,17 +40,23 @@
   --top-bar-height: 30%;
 }
 
+html{
+  color: var(--text-primary);
+}
+
 .dark{
   --primary-color:#121212;
   --secondary-color:#3a3a3a;
   --text-primary: #ffffff;
   --border-color: #ffffff;
+  --button-bg: black;
 }
 /* functionalities */
 button{
   border: none;
   cursor: pointer;
   color: var(--text-primary);
+  background-color: var(--button-bg);
 }
 
 .flex{
