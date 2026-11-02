@@ -2,6 +2,7 @@
   --border-radius: 15px;
   --primary-width: 40%;
 }
+
 #todo-list{
   flex-direction: column;
   align-items: center;
@@ -16,7 +17,6 @@
   justify-content: flex-end;
   align-items: center;
   gap: 7px;
-  /* border: black solid 1px; */
 }
 
 .add-item-container input{
