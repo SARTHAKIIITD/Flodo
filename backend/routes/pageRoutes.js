@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const pageController = require('../controllers/pageControllers');
+const pageControllers = require('../controllers/pageControllers');
 
-router.get("/signup", pageController.signup);
-router.get("/dashboard", pageController.dashboard);
+router.get('/', pageControllers.login);
+router.get('/signup', pageControllers.signup);
+router.get('/dashboard', pageControllers.dashboard);
+router.use(pageControllers.error404);
 
 module.exports = router;
