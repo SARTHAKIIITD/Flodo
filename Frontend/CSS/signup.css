@@ -49,6 +49,7 @@ form{
 
 #sign-up-btn{
   font-family: inherit;
+  cursor: pointer;
   height: 50px;
   border-radius: 30px;
   border: none;
