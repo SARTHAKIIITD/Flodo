@@ -63,6 +63,47 @@ const signup = (req, res) => {
   );
 };
 
+const login = (req, res) => {
+  const{username, password} = req.body;
+  //check username
+  const specialCharacters = "@#$%^&*!~`- _+=()[]{}:;\"'<>,.?/\\|";
+  const containsSpecialCharacters = [...specialCharacters].some(char =>
+    username.includes(char)
+  );
+  if (containsSpecialCharacters) {
+    return res.status(400).json({
+      message : "Username must not contain special characters or spaces"
+    });
+  }
+
+  userModel.checkUser(
+    username,
+    (err,result) => {
+      // Database error
+      if(err){
+        console.log(`Error while checking credentials for ${username}\n${err}`);
+        return res.status(500).json({
+          message : 'Something went wrong',
+        }
+        );
+      }
+      // Wrong password
+      if(password !== result[0].password){
+        return res.status(400).json({
+          message: 'incorrect password',
+        });
+      }
+      // Successful login
+      console.log(`ID: ${result[0].id} login successfully`);
+      return res.status(200).json({
+        message : 'true',
+        user : result[0],
+      });
+    }
+  );
+};
+
 module.exports = {
   signup,
+  login,
 };

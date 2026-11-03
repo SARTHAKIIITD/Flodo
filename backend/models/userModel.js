@@ -21,6 +21,24 @@ const insertUser = (
   );
 };
 
+const checkUser =(
+  username,
+  callback
+) => {
+  const sql = `
+  SELECT * FROM users
+  WHERE username = ?`;
+
+  db.query(
+    sql,
+    [username],
+    (err, result) => {
+      callback(err, result);
+    }
+  );
+};
+
 module.exports = {
   insertUser,
+  checkUser,
 };

@@ -5,10 +5,28 @@ createAccountBtn.addEventListener("click", () => {
 
 document.querySelector('#login-form').addEventListener('submit', async(e) =>{
   e.preventDefault();
-  try{
-    const username = document.querySelector('#username');
-    const password = document.querySelector('#password');
+  
+  const username = document.querySelector('#username');
+  const password = document.querySelector('#password');
 
+  if(
+  !username.value.trim() ||
+  !password.value.trim()
+  ){
+    alert("All the fields are required to be filled");
+    return;
+  }
+  //check username
+  const specialCharacters = "@#$%^&*!~`- _+=()[]{}:;\"'<>,.?/\\|";
+  const containsSpecialCharacters = [...specialCharacters].some(char =>
+    username.value.includes(char)
+  );
+  if (containsSpecialCharacters) {
+    alert('Username must not contain special characters or spaces');
+    return;
+  }
+
+  try{
     const response = await fetch('auth/login',{
       method: 'POST',
       headers:{
@@ -22,6 +40,7 @@ document.querySelector('#login-form').addEventListener('submit', async(e) =>{
 
     const data = await response.json();
     if(!response.ok){
+      alert(data.message);
       throw new Error('Unable to login');
     }
     
@@ -40,13 +59,3 @@ document.querySelector('#login-form').addEventListener('submit', async(e) =>{
   }
 
 });
-
-
-
-
-
-// if(!response.ok) throws an error before you can handle the server's message properly. Also, 'Unable to login' || data.message always evaluates to 'Unable to login'.
-
-// data is declared inside try, so you cannot access it inside catch.
-
-// data.message.length >= 2 is unnecessary if your backend sends 'true' for successful login.
