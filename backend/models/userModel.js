@@ -38,7 +38,26 @@ const checkUser =(
   );
 };
 
+const insertItem = (
+  id,
+  item,
+  callback
+) => {
+  const sql = `
+  INSERT INTO todos
+  (todo, user_id)
+  VALUES (?,?)
+  `;
+  db.query(
+    sql,
+    [item, id],
+    (err, result) => {
+      callback(err, result);
+    }
+  );
+};
 module.exports = {
   insertUser,
   checkUser,
+  insertItem,
 };

@@ -1,7 +1,9 @@
+// Dark theme 
 document.querySelector('#dark-mode-btn').addEventListener('click', () => {
   document.documentElement.classList.toggle('dark');
 });
 
+// Menu action
 document.querySelectorAll('.btn-container button').forEach(button => {
   button.addEventListener('click', () => {
     document.querySelectorAll('.page').forEach(pg => {
@@ -12,3 +14,7 @@ document.querySelectorAll('.btn-container button').forEach(button => {
   else if(button.id === 'kanban-btn') document.querySelector('#kanban-board').classList.add('active-page');
   });
 });
+
+const user = JSON.parse(localStorage.getItem('user'));
+// console.log(user);
+
