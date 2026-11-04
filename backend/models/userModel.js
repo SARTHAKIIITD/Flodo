@@ -56,8 +56,29 @@ const insertItem = (
     }
   );
 };
+
+const getTodos = (
+  id,
+  callback
+) => {
+  const sql = `
+  SELECT id, todo
+  FROM todos
+  WHERE 
+  user_id = ?
+  `;
+  db.query(
+    sql,
+    [id],
+    (err, result) =>{
+      callback(err, result);
+    }
+  );
+};
+
 module.exports = {
   insertUser,
   checkUser,
   insertItem,
+  getTodos,
 };

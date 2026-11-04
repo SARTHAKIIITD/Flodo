@@ -24,6 +24,25 @@ const addItem = (req, res) => {
   );
 };
 
+const getList = (req, res) => {
+  userModel.getTodos(
+    req.params.id,
+    (err, result) =>{
+      if(err){
+        console.log(`Unable to get todos for user ID: ${req.params.id}\n${err}`);
+        return res.status(500).json({
+          message : 'something went wrong',
+        });
+      }
+      console.log(result);
+      return res.status(200).json({
+        message : 'Your list here',
+        todoList : result,
+      });
+    }
+  );
+};
 module.exports = {
   addItem,
+  getList,
 };
