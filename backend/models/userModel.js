@@ -76,9 +76,30 @@ const getTodos = (
   );
 };
 
+const removeItem = (
+  id,
+  todoId,
+  callback
+) => {
+  const sql = `
+  DELETE FROM
+  todos
+  WHERE
+  id = ?
+  `;
+  db.query(
+    sql,
+    [todoId],
+    (err, result) => {
+      callback(err, result);
+    }
+  );
+};
+
 module.exports = {
   insertUser,
   checkUser,
   insertItem,
   getTodos,
+  removeItem,
 };

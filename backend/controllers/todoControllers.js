@@ -42,7 +42,27 @@ const getList = (req, res) => {
     }
   );
 };
+
+const deleteItem = (req, res) => {
+  const {todoId} = req.body;
+  userModel.removeItem(
+    req.params.id,
+    todoId,
+    (err, result) => {
+      if(err){
+        console.log(`Error while removing item for user ID: ${req.params.id}\n${err}`);
+        return res.status(500).json({
+          message : `Something went wrong`,
+        });
+      }
+      return res.status(200).json({
+        message : 'item deleted',
+      });
+    }
+  );
+};
 module.exports = {
   addItem,
   getList,
+  deleteItem,
 };
