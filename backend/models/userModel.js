@@ -96,10 +96,29 @@ const removeItem = (
   );
 };
 
+const clearTodos = (
+  userId,
+  callback
+) => {
+  const sql = `
+  DELETE FROM
+  todos
+  WHERE
+  user_id = ?
+  `;
+  db.query(
+    sql,
+    [userId],
+    (err, result) => {
+      callback(err,result);
+    }
+  );
+};
 module.exports = {
   insertUser,
   checkUser,
   insertItem,
   getTodos,
   removeItem,
+  clearTodos,
 };

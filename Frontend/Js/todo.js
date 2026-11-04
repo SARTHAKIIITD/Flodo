@@ -109,3 +109,22 @@ document.querySelector('.list-display').addEventListener('click', async(e) => {
   }
   displayList();
 });
+
+// Delete all todos
+document.querySelector('#clear-all-btn').addEventListener('click', async () => {
+  try{
+
+    const response = await fetch(`todo/delete/all/${user.id}`, {
+      method: 'DELETE',
+    });
+    const data = await response.json();
+    if(!response.ok){
+      alert(data.message);
+      throw new Error(data.message || 'Something went wrong');
+    }
+  }
+  catch(err){
+    console.log(err);
+  }
+  displayList();
+});

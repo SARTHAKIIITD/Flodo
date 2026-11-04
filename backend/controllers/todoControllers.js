@@ -1,4 +1,5 @@
 const userModel = require('../models/userModel');
+
 const addItem = (req, res) => {
   const {item} = req.body;
   if(!item.trim()){
@@ -34,7 +35,6 @@ const getList = (req, res) => {
           message : 'something went wrong',
         });
       }
-      console.log(result);
       return res.status(200).json({
         message : 'Your list here',
         todoList : result,
@@ -61,8 +61,27 @@ const deleteItem = (req, res) => {
     }
   );
 };
+
+const deleteAllItems = (req, res) => {
+  userModel.clearTodos(
+    req.params.id,
+    (err, result) => {
+      if(err){
+        console.log(`Error while deleting all item of user ID: ${req.params.id}\n${err}`);
+        return res.status(400).json({
+          message : `Something went wrong`,
+        });
+      }
+      console.log(`All items deleted for user ID: ${req.params.id}`);
+      return res.status(200).json({
+        message : `Items deleted successfully`,
+      });
+    }
+  );
+};
 module.exports = {
   addItem,
   getList,
   deleteItem,
+  deleteAllItems,
 };
