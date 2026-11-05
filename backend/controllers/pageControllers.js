@@ -3,7 +3,7 @@ const frontendPath = path.join(__dirname,'../../Frontend/Pages');
 
 const login = (req, res) => {
   res.status(200).sendFile(
-    path.join(frontendPath, '../../index.html')
+    path.join(frontendPath, '../index.html')
   );
 };
 
