@@ -49,6 +49,7 @@
   display: flex;
   min-height: 50px;
   align-items: center;
+  gap: 10px;
   padding: 0 15px;
   background-color: var(--primary-color);
   border-radius: 7px;
@@ -58,7 +59,14 @@
 .item-name-container{
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.item-name-container form{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .item-action-container{

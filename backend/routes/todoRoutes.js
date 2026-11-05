@@ -7,6 +7,6 @@ router.get('/get/:id', todoControllers.getList); // Get List
 router.delete('/delete/:id', todoControllers.deleteItem); // Delete item
 router.delete('/delete/all/:id', todoControllers.deleteAllItems); // Delete all todos
 router.patch('/patch/:id', todoControllers.checkItem); // Checkbox
+router.patch('/patch/item/:id', todoControllers.editItemName); // Edit Item name
 
 module.exports = router;
-

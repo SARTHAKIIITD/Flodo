@@ -136,6 +136,26 @@ const toggleCompleted = (
   );
 };
 
+const changeTodoName = (
+  userId,
+  todoId,
+  newItem,
+  callback
+) => {
+  const sql = `
+  UPDATE todos
+  SET todo = ?
+  WHERE id = ? 
+  `;
+  db.query(
+    sql,
+    [newItem, todoId],
+    (err, result) => {
+      callback(err, result);
+    }
+  );
+};
+
 module.exports = {
   insertUser,
   checkUser,
@@ -144,4 +164,5 @@ module.exports = {
   removeItem,
   clearTodos,
   toggleCompleted,
+  changeTodoName,
 };

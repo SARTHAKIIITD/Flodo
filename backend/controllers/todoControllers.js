@@ -99,10 +99,31 @@ const checkItem = (req, res) => {
     }
   );
 };
+
+const editItemName = (req, res) => {
+  const{todoId, newItem} = req.body;
+  userModel.changeTodoName(
+    req.params.id,
+    todoId,
+    newItem,
+    (err, result) => {
+      if(err){
+        console.log(`Error which changing item name for user ID: ${req.params.id}\n${err}`);
+        return res.status(400).json({
+          message : `Something Went Wrong`,
+        });
+      }
+      return res.status(200).json({
+        message : `ok`,
+      });
+    }
+  );
+};
 module.exports = {
   addItem,
   getList,
   deleteItem,
   deleteAllItems,
   checkItem,
+  editItemName,
 };

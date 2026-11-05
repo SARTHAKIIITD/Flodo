@@ -10,14 +10,13 @@ async function getList() {
     localStorage.setItem('todoList',JSON.stringify(data.todoList) || '[]');
   }
     catch(err){
-      // alert('Unable to make contact with the server');
       console.log(err);
     }
 }
 
 // Display todos
-async function displayList(){
-  await getList();
+async function displayList(refresh = true){
+  if(refresh) await getList();
   const todoList = JSON.parse(localStorage.getItem('todoList'));
   const listDisplay = document.querySelector('.list-display');
   listDisplay.innerHTML = ``;
@@ -25,12 +24,12 @@ async function displayList(){
     for(let i = 0; i< todoList.length; i++){
       listDisplay.innerHTML +=`
       <div class= 'item-container' data-id = "${todoList[i].id}">
+      <input class="item-checkbox" type="checkbox" ${todoList[i].completed === 1 ? 'checked' : ''}>
         <div class = 'item-name-container'>
-        <input class="item-checkbox" type="checkbox" ${todoList[i].completed === 1 ? 'checked' : ''}>
         <span>${todoList[i].todo}</span>
+        <button class = "edit-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen preview-icon"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/></svg></button> 
         </div>
         <div class = 'item-action-container'>
-        <button class = "edit-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen preview-icon"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/></svg></button> 
         <button class = "remv-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x preview-icon"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button> 
         </div>
       </div>
@@ -75,18 +74,56 @@ document.querySelector('.add-item-container').addEventListener('submit', async(e
   displayList();
 });
 
-// Remove and edit an item from todo
+// Actions on Item
 document.querySelector('.list-display').addEventListener('click', async(e) => {
   const container = e.target.closest('.item-container');
   if(!container) return;
   const todoId = container.dataset.id;
   // Edit button
   if(e.target.closest('.edit-btn')){
-    console.log(`edit button was clicked with id ${todoId}`);
+    const itemNameContainer = container.querySelector('.item-name-container');
+    const item = itemNameContainer.querySelector('span').textContent;
+    itemNameContainer.innerHTML = `
+    <form>
+    <input type="text" placeholder="${item}" value="${item}">
+    <button><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check preview-icon"><path d="M20 6 9 17l-5-5"/></svg></button>
+    </form>
+    `;
+    const editInput = itemNameContainer.querySelector('input');
+    editInput.focus();
+    editInput.select();
+    itemNameContainer.querySelector('form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const newItem = e.target.querySelector('input').value;
+      if(newItem === item){
+        displayList(false);
+        return;
+      }
+      try{
+        const response = await fetch(`/todo/patch/item/${user.id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            todoId,
+            newItem,
+          })
+        });
+        const data = await response.json();
+        if(!response.ok){
+          throw new Error(data.message || `Something Went Wrong`);
+        }
+        displayList();
+      }
+      catch(err){
+        console.error(err);
+        displayList();
+      }
+    });
   }
   // Remove button
   else if(e.target.closest('.remv-btn')){
-    console.log(`remove button was clicked with id ${todoId}`);
     try{
       const response = await fetch(`/todo/delete/${user.id}`, {
         method: 'DELETE',
@@ -106,6 +143,7 @@ document.querySelector('.list-display').addEventListener('click', async(e) => {
     catch(err){
       console.log(err);
     }
+     displayList();
   }
 
   // Check box
@@ -131,8 +169,8 @@ document.querySelector('.list-display').addEventListener('click', async(e) => {
     catch(err){
       console.log(err);
     }
+     displayList();
   }
-  displayList();
 });
 
 // Delete all todos
