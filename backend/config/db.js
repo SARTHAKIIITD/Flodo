@@ -5,12 +5,17 @@ const con = mysql.createConnection({
   port: Number(process.env.DB_PORT),
   user: process.env.USER,
   password: process.env.PASSWORD,
-  database: process.env.DATABASE
+  database: process.env.DATABASE,
+
+  waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0,
+    connectTimeout: 20000
 });
 
 con.connect((err) => {
   if(err){
-    console.log(`Unable to connect with database\n${err}`);
+    console.log(`Unable to connect with database\n${err}\n${err.message}`);
     return;
   }
   console.log(`Database is connected successfully!`);
