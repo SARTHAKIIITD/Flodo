@@ -16,5 +16,8 @@ document.querySelectorAll('.btn-container button').forEach(button => {
 });
 
 const user = JSON.parse(localStorage.getItem('user'));
-// console.log(user);
 
+document.querySelector('#logout-btn').addEventListener('click', () =>{
+  localStorage.clear();
+  window.location.href = '/';
+});
