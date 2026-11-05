@@ -1,8 +1,12 @@
 const path = require('path');
 const express = require('express');
+const cors = require('cors');
 const app = express();
 
 app.use(express.json());
+app.use(cors({
+  origin: 'https://flodo.onrender.com/'
+}));
 // app.use(express.static(path.join(__dirname,'../')));
 app.use(express.static(path.join(__dirname,'../Frontend')));
 
