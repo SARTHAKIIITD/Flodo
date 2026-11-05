@@ -62,7 +62,7 @@ const getTodos = (
   callback
 ) => {
   const sql = `
-  SELECT id, todo
+  SELECT id, todo, completed
   FROM todos
   WHERE 
   user_id = ?
@@ -114,6 +114,28 @@ const clearTodos = (
     }
   );
 };
+
+const toggleCompleted = (
+  userId,
+  todoId,
+  isCompleted,
+  callback
+) => {
+  const sql = `
+  UPDATE todos
+  SET completed = ?
+  WHERE
+  id = ?
+  `;
+  db.query(
+    sql,
+    [isCompleted, todoId],
+    (err, result) => {
+      callback(err, result);
+    }
+  );
+};
+
 module.exports = {
   insertUser,
   checkUser,
@@ -121,4 +143,5 @@ module.exports = {
   getTodos,
   removeItem,
   clearTodos,
+  toggleCompleted,
 };

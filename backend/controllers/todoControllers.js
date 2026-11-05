@@ -79,9 +79,30 @@ const deleteAllItems = (req, res) => {
     }
   );
 };
+
+const checkItem = (req, res) => {
+  const {todoId, isCompleted} = req.body;
+  userModel.toggleCompleted(
+    req.params.id,
+    todoId,
+    isCompleted,
+    (err, result) => {
+      if(err){
+        console.log(`Error while toggle completed for user ID: ${req.params.id}`);
+        return res.status(400).json({
+          message : `Something went wrong`,
+        });
+      }
+      return res.status(200).json({
+        message : 'ok',
+      });
+    }
+  );
+};
 module.exports = {
   addItem,
   getList,
   deleteItem,
   deleteAllItems,
+  checkItem,
 };

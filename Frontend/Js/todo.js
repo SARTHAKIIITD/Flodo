@@ -26,7 +26,7 @@ async function displayList(){
       listDisplay.innerHTML +=`
       <div class= 'item-container' data-id = "${todoList[i].id}">
         <div class = 'item-name-container'>
-        <input type="checkbox">
+        <input class="item-checkbox" type="checkbox" ${todoList[i].completed === 1 ? 'checked' : ''}>
         <span>${todoList[i].todo}</span>
         </div>
         <div class = 'item-action-container'>
@@ -85,7 +85,7 @@ document.querySelector('.list-display').addEventListener('click', async(e) => {
     console.log(`edit button was clicked with id ${todoId}`);
   }
   // Remove button
-  if(e.target.closest('.remv-btn')){
+  else if(e.target.closest('.remv-btn')){
     console.log(`remove button was clicked with id ${todoId}`);
     try{
       const response = await fetch(`/todo/delete/${user.id}`, {
@@ -101,6 +101,31 @@ document.querySelector('.list-display').addEventListener('click', async(e) => {
       if(!response.ok){
         alert(data.message || 'something went wrong');
         throw new Error(data.message);
+      }
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
+
+  // Check box
+  else if(e.target.closest('.item-checkbox')){
+    const isCompleted = e.target.checked;
+    try{
+      const response = await fetch(`todo/patch/${user.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify({
+          todoId,
+          isCompleted,
+        })
+      });
+      const data = await response.json();
+      if(!response.ok){
+        alert(data.message || 'Something went wrong');
+        throw new Error(data.message || 'Something went wrong');
       }
     }
     catch(err){
