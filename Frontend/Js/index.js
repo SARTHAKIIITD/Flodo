@@ -1,8 +1,8 @@
-const API_URL = 'https://flodo.onrender.com';
+// const API_URL = 'https://flodo.onrender.com';
 
 const createAccountBtn = document.querySelector('#create-account');
 createAccountBtn.addEventListener("click", () => {
-  window.location.href =`${API_URL}/signup`;
+  window.location.href =`/signup`;
 });
 
 document.querySelector('#login-form').addEventListener('submit', async(e) =>{
@@ -29,7 +29,7 @@ document.querySelector('#login-form').addEventListener('submit', async(e) =>{
   }
 
   try{
-    const response = await fetch(`${API_URL}/auth/login`,{
+    const response = await fetch(`/auth/login`,{
       method: 'POST',
       headers:{
         'Content-Type': 'application/json',
