@@ -1,4 +1,5 @@
-const userModel = require('../models/userModel');
+const Todo = require('../models/todo');
+const todoRepository = require('../repositories/todoRepository');
 
 const addItem = (req, res) => {
   const {item} = req.body;
@@ -7,9 +8,13 @@ const addItem = (req, res) => {
       message : 'Please enter valid todo.'
     });
   }
-  userModel.insertItem(
-    req.params.id,
-    item,
+  const todo = new Todo(
+    item.trim(),
+    req.params.id
+  );
+
+  todoRepository.insertItem(
+    todo,
     (err, result) => {
       if(err){
         console.log(`Item insertion error for id: ${req.params.id}\n${err}`);
@@ -17,6 +22,7 @@ const addItem = (req, res) => {
           message : 'Something went wrong'
         });
       }
+      todo.id = result.insertId;
       console.log(`User ${req.params.id} added Item id: ${result.insertId}`);
       return res.status(201).json({
         message : 'Item added successfully',
@@ -26,7 +32,7 @@ const addItem = (req, res) => {
 };
 
 const getList = (req, res) => {
-  userModel.getTodos(
+  todoRepository.getTodos(
     req.params.id,
     (err, result) =>{
       if(err){
@@ -45,7 +51,7 @@ const getList = (req, res) => {
 
 const deleteItem = (req, res) => {
   const {todoId} = req.body;
-  userModel.removeItem(
+  todoRepository.removeItem(
     req.params.id,
     todoId,
     (err, result) => {
@@ -63,7 +69,7 @@ const deleteItem = (req, res) => {
 };
 
 const deleteAllItems = (req, res) => {
-  userModel.clearTodos(
+  todoRepository.clearTodos(
     req.params.id,
     (err, result) => {
       if(err){
@@ -82,7 +88,7 @@ const deleteAllItems = (req, res) => {
 
 const checkItem = (req, res) => {
   const {todoId, isCompleted} = req.body;
-  userModel.toggleCompleted(
+  todoRepository.toggleCompleted(
     req.params.id,
     todoId,
     isCompleted,
@@ -102,7 +108,7 @@ const checkItem = (req, res) => {
 
 const editItemName = (req, res) => {
   const{todoId, newItem} = req.body;
-  userModel.changeTodoName(
+  todoRepository.changeTodoName(
     req.params.id,
     todoId,
     newItem,

@@ -1,7 +1,9 @@
-const userModel = require('../models/userModel');
+const User = require('../models/user');
+const userRepository = require('../repositories/userRepository');
 
 const signup = (req, res) => {
   const {name, username, email, password} = req.body;
+
   if(
     !name.trim() ||
     !username.trim() ||
@@ -12,7 +14,6 @@ const signup = (req, res) => {
       message : 'All the fields are required to be filled'
     });
   }
-
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   // check email
   if (!emailRegex.test(email.trim())) {
@@ -20,13 +21,11 @@ const signup = (req, res) => {
       message: 'email must not contain special characters'
     });
   }
-
   const specialCharacters = "@#$%^&*!~`- _+=()[]{}:;\"'<>,.?/\\|";
   //check username
   const containsSpecialCharacters = [...specialCharacters].some(char =>
     username.includes(char)
   );
-
   if (containsSpecialCharacters) {
     return res.status(400).json({
       message: 'username must not contain special characters'
@@ -36,18 +35,21 @@ const signup = (req, res) => {
   const nameContainsSpecialCharacters = [...specialCharacters].some(char =>
     name.includes(char)
   );
-
   if (nameContainsSpecialCharacters) {
     return res.status(400).json({
       message: 'name must not contain special characters'
     });
   }
-  
-  userModel.insertUser(
-    name,
-    username,
-    email,
-    password,
+  // =================================================
+  const user = new User(
+    name.trim(),
+    username.trim(),
+    email.trim(),
+    password
+  );
+
+  userRepository.insertUser(
+    user,
     (err, result) => {
       if(err){
         console.log(`Insertion error\n${err}`);
@@ -55,9 +57,10 @@ const signup = (req, res) => {
           message: 'Unexpected sever error'
         });
       }
-      console.log(`new user created with ID:${result.insertId}`);
+      user.id = result.insertId;
+      console.log(`new user created with ID: ${result.insertId}`);
       return res.status(201).json({
-        message: 'User created successfully!'
+        message : 'User is created successfully',
       });
     }
   );
@@ -76,7 +79,7 @@ const login = (req, res) => {
     });
   }
 
-  userModel.checkUser(
+  userRepository.checkUser(
     username,
     (err,result) => {
       // Database error
