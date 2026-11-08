@@ -1,7 +1,8 @@
 const User = require('../models/user');
 const userRepository = require('../repositories/userRepository');
+const bcrypt = require('bcrypt');
 
-const signup = (req, res) => {
+const signup = async (req, res) => {
   const {name, username, email, password} = req.body;
 
   if(
@@ -40,12 +41,15 @@ const signup = (req, res) => {
       message: 'name must not contain special characters'
     });
   }
-  // =================================================
+  // ================== HASHING PASSWORD ==============
+  const hashedPassword = await bcrypt.hash(password, 12);
+
+  // ==================================================
   const user = new User(
     name.trim(),
     username.trim(),
     email.trim(),
-    password
+    hashedPassword
   );
 
   userRepository.insertUser(
@@ -66,7 +70,7 @@ const signup = (req, res) => {
   );
 };
 
-const login = (req, res) => {
+const login = async (req, res) => {
   const{username, password} = req.body;
   //check username
   const specialCharacters = "@#$%^&*!~`- _+=()[]{}:;\"'<>,.?/\\|";
@@ -81,7 +85,7 @@ const login = (req, res) => {
 
   userRepository.checkUser(
     username,
-    (err,result) => {
+    async (err,result) => {
       // Database error
       if(err){
         console.log(`Error while checking credentials for ${username}\n${err}`);
@@ -90,12 +94,21 @@ const login = (req, res) => {
         }
         );
       }
+
+      const isMatch = await bcrypt.compare(password, result[0].password);
       // Wrong password
-      if(password !== result[0].password){
+      if (!isMatch) {
+        console.log("Password is correct!");
         return res.status(400).json({
           message: 'incorrect password',
         });
-      }
+      } 
+      // else {
+      //   console.log("Invalid password!");
+      // }
+
+      // if(password !== result[0].password){
+      // }
       // Successful login
       console.log(`ID: ${result[0].id} login successfully`);
       return res.status(200).json({
