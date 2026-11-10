@@ -103,12 +103,6 @@ const login = async (req, res) => {
           message: 'incorrect password',
         });
       } 
-      // else {
-      //   console.log("Invalid password!");
-      // }
-
-      // if(password !== result[0].password){
-      // }
       // Successful login
       console.log(`ID: ${result[0].id} login successfully`);
       return res.status(200).json({
