@@ -21,4 +21,19 @@ con.getConnection((err) => {
   console.log(`Database is connected successfully!`);
 });
 
+// const con = mysql.createConnection({
+//   host:process.env.LOCAL_DB_HOST,
+//   user: process.env.LOCAL_DB_USER,
+//   password: process.env.LOCAL_DB_PASSWORD,
+//   database: process.env.LOCAL_DB_DATABASE,
+// });
+
+// con.connect((err) => {
+//   if(err){
+//     console.log(`Unable to connect with local database\n${err}\n${err.message}`);
+//     return;
+//   }
+//   console.log(`Local Database is connected successfully!`);
+// });
+
 module.exports = con;
