@@ -94,23 +94,30 @@
 
     <!-- kanban Board -->
     <section id="kanban-board" class="page">
-      kanban borad
+      <h1>kanban borad</h1>
       <div class="kanban-inner-container">
         <!-- todo -->
         <div class="status" id="todo">
           <h2>todo</h2>
           <form class="task-input-container">
             <input type="text" class="kan-task-input">
-            <button class="kan-addbtn">add</button>
+            <button id="kan-add-btn">add</button>
           </form>
+          <div class="drop-area" id="todo-drp-area">
+            <div class="kan-task" draggable="true" id="task1">
+              My First Task
+            </div>
+          </div>
           </div>
           <!--in progress -->
         <div class="status" id="in-progess">
           <h2>in-progress</h2>
+          <div class="drop-area" id="in-progress-drp-area"></div>
         </div>
         <!-- done -->
         <div class="status" id="done">
           <h2>done</h2>
+          <div class="drop-area" id="done-drp-area"></div>
         </div>
       </div>
     </section>
