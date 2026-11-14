@@ -1,13 +1,58 @@
+/* =========================================
+   1. IMPORTS
+========================================= */
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-*{
+
+
+/* =========================================
+   2. CSS RESET & GLOBAL STYLES
+========================================= */
+
+* {
   margin: 0;
   padding: 0;
-  font-family: "Roboto", sans-serif;
   box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
 }
 
-html{
-  scroll-behavior: none;
+/* =========================================
+   3. ROOT VARIABLES
+========================================= */
+
+:root {
+  /* Font Family */
+  --font-primary: "Roboto", sans-serif;
+
+  /* Text Colours */
+  --text-primary-colour: #000000;
+  --text-secondary-colour: #9a9a9a;
+  --text-btn-colour: #ffffff;
+
+  /* Border Colours */
+  --border--primary-colour: #000000 ;
+  --border-secondary-colour: #a7a7a7;
+
+  /* Background Colours */
+  --bg-primary: #ffffff;
+  --bg-secondary: #000000;
+  --bg-banner: rgb(138, 43, 226);
+  --bg-btn-hover: rgb(74, 18, 127);
+
+  /* Typography */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 900;
+
+  /* Border Radius */
+  --border-radius-btn: 7px;
+}
+
+/* =========================================
+   4. TYPOGRAPHY
+========================================= */
+body{
+  color: var(--text-primary-colour);
 }
 
 h1 {
@@ -16,20 +61,25 @@ h1 {
 
 h2 {
   font-size: clamp(1.6rem, 2.5vw, 2rem);
-  font-weight: 900;
+  font-weight: var(--font-weight-bold);
 }
 
 p {
-  color: #9a9a9a;
+  color: var(--text-secondary-colour);
   font-size: clamp(0.9rem, 1.2vw, 1.0625rem);
 }
 
-span{
+span {
   text-decoration: underline;
-  color: black;
-  font-weight: 400;
+  color: var(--text-primary-colour);
+  font-weight: var(--font-weight-normal);
   cursor: pointer;
 }
+
+
+/* =========================================
+   5. FORM ELEMENTS - GLOBAL
+========================================= */
 
 input {
   font-size: clamp(0.9rem, 1.1vw, 1rem);
@@ -43,89 +93,149 @@ button {
   font-size: clamp(0.9rem, 1.1vw, 1rem);
 }
 
-.flex{
+
+/* =========================================
+   6. REUSABLE UTILITY CLASSES
+========================================= */
+
+.flex {
   display: flex;
 }
-.outer-container{
-  height: 100vh;
+
+
+/* =========================================
+   7. MAIN LAYOUT
+========================================= */
+
+.outer-container {
+  width: 100%;
+  min-height: 100vh;
 }
 
-.banner{
+
+/* =========================================
+   8. BANNER SECTION
+========================================= */
+
+.banner {
   min-width: 65%;
   z-index: 1;
-  background-color: rgb(138, 43, 226);
+  background-color: var(--bg-banner);
   box-shadow: 8px 0 15px rgba(138, 43, 226, 0.4);
 }
-.outer-login-container{
+
+
+/* =========================================
+   9. LOGIN SECTION
+========================================= */
+
+.outer-login-container {
   flex-grow: 1;
   justify-content: center;
-   background-color: rgb(255, 255, 255);
-   overflow: auto;
+  background-color: var(--bg-primary);
+  overflow: auto;
 }
-.login-container{
+
+.login-container {
   flex-direction: column;
   justify-content: space-evenly;
-  align-items: flex-start;
   padding-bottom: 140px;
 }
 
-.login{
+.login {
   flex-direction: column;
   gap: 20px;
 }
 
-.login form{
+
+/* =========================================
+   10. LOGIN FORM
+========================================= */
+
+.login form {
   flex-direction: column;
   width: 100%;
   gap: 15px;
 }
-.login-inputs{
-  width:100%;
-  height: 50px;
-  border: none;
-  border-bottom: 2px solid #b1b1b1;
-  /* font-size: inherit; */
-   transition: border-color 0.3s ease;
-}
 
-input:focus{
-  outline: none;
-  border-bottom: 2px solid #000000;
-}
-
-.login button{
+.login-inputs {
   width: 100%;
   height: 50px;
   border: none;
-  border-radius: 7px;
-  cursor: pointer;
-  font-family: inherit;
-  /* font-size: inherit; */
-  font-weight: 500;
+  border-bottom: 2px solid var(--border-secondary-colour);
+  transition: border-color 0.3s ease;
 }
 
-#login-btn{
-  background-color: black;
+
+/* =========================================
+   11. BUTTONS
+========================================= */
+
+.login button {
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: var(--border-radius-btn);
+  cursor: pointer;
+  font-weight: var(--font-weight-medium);
+}
+
+
+/* Primary Login Button */
+
+#login-btn {
+  background-color:var(--bg-secondary);
   color: white;
   transition: background-color 0.3s ease;
 }
 
-#login-btn:hover{
-  background-color: rgb(74, 18, 127);
-}
 
-#login-with-google-btn{
-  background-color: white;
-  border: 2px solid rgb(167, 167, 167);
+/* Google Login Button */
+
+#login-with-google-btn {
+  background-color: var(--bg-primary);
+  border: 2px solid var(--border-secondary-colour);
   align-items: center;
   justify-content: center;
 }
 
-#login-with-google-btn img{
+#login-with-google-btn img {
   height: 70%;
   width: auto;
-  object-fit: contain;
 }
-.forget-pass{
+
+/* =========================================
+   12. INTERACTIVE STATES
+========================================= */
+
+/* Input Focus */
+
+input:focus {
+  outline: none;
+  border-bottom: 2px solid var(--border--primary-colour);
+}
+
+
+/* Login Button Hover */
+
+#login-btn:hover {
+  background-color: var(--bg-btn-hover);
+}
+
+
+/* =========================================
+   13. ADDITIONAL ELEMENTS
+========================================= */
+
+.forget-pass {
   align-self: center;
 }
+
+
+/* =========================================
+   14. OPTIONAL / FUTURE STYLES
+========================================= */
+
+/* html {
+  scroll-behavior: none;
+} */
